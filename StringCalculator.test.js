@@ -107,6 +107,12 @@ describe('StringCalculator', () => {
     it('TEST CASE 11: should allow multiple delimiters', () => {
         assert.strictEqual(calculator.Add("//[*][%]\n1*2%3"), 6);
         assert.strictEqual(calculator.Add("//[;][,]\n1;2,3"), 6);
-        assert.strictEqual(calculator.Add("//[***][%]\n1***2%3"), 6);
+    });
+
+// TEST CASE 12: handle multiple delimiters with length longer than one char like “//[**][%%]\n1**2%%3” == 6.
+
+    it('TEST CASE 12: should allow multiple delimiters with length longer than one char', () => {
+        assert.strictEqual(calculator.Add("//[**][%%]\n1***2%%3"), 6);
+        assert.strictEqual(calculator.Add("//[***][%]\n3***4%3"), 10);
     });
 });
