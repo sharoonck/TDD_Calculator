@@ -85,4 +85,11 @@ describe('StringCalculator', () => {
         assert.strictEqual(calculator.GetCalledCount(), 3); // Count should be 3 after 3 Add calls
     });
 
+// TEST CASE 9: Numbers bigger than 1000 should be ignored
+    it('TEST CASE 9: should ignore numbers larger than 1000', () => {
+        assert.strictEqual(calculator.Add("2,1001"), 2);
+        assert.strictEqual(calculator.Add("1000,2000,3"), 1003); // Only adds 1000 and 3
+        assert.strictEqual(calculator.Add("1,999,1000,1001,1002"), 2000); // Adds 1, 999, and 1000
+    });
+
 });

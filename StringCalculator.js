@@ -10,15 +10,23 @@ class StringCalculator {
 
         const { delimiter, numString } = this.findDelimiter(numbers);
         const numArray = numString.split(new RegExp(`[${delimiter}\\n]`));
-        let sum = 0;
-        const negatives = numArray.filter(num => parseInt(num, 10) < 0); // Filter negative numbers
+        const negatives = [];
 
-                // If there are negative numbers, throw an exception
+        const sum = numArray.reduce((total, current) => {
+            const num = parseInt(current, 10);
+
+            if (num < 0) {
+                negatives.push(num);
+            } else if (num <= 1000) {
+                return total + num; // Accumulate only numbers <= 1000
+            }
+
+            return total;
+        }, 0);
+
         if (negatives.length > 0) {
             throw new Error(`negatives not allowed: ${negatives.join(", ")}`);
         }
-
-        sum = numArray.reduce((acc, num) => acc + (parseInt(num, 10) || 0), 0);
 
         return sum;
     }
