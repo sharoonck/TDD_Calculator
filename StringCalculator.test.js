@@ -35,4 +35,12 @@ describe('StringCalculator', () => {
         assert.strictEqual(calculator.Add("4\n5,6\n7"), 22);
     });
 
+// TEST CASE 4: Support different delimiters
+
+    it('should support different delimiters', () => {
+        assert.strictEqual(calculator.Add("//;\n1;2"), 3); // Using `;`
+        assert.strictEqual(calculator.Add("//:\n5:10:15"), 30); // Using `:`
+        assert.strictEqual(calculator.Add("//|\n3|4|5|6"), 18); // Using `|`
+    });
+
 });
