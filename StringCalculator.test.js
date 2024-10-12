@@ -60,7 +60,7 @@ describe('StringCalculator', () => {
 
 // TEST CASE 6: If there are multiple negatives, show all of them in the exception message
 
-    it('should throw an exception for negative numbers', () => {
+    it('should throw an exception for negative numbers and show as list', () => {
         assert.throws(() => { calculator.Add("5,-1,-2"); }, 
         {
             name: 'Error',
