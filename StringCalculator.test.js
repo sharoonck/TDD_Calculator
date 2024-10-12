@@ -92,4 +92,12 @@ describe('StringCalculator', () => {
         assert.strictEqual(calculator.Add("1,999,1000,1001,1002"), 2000); // Adds 1, 999, and 1000
     });
 
+// TEST CASE 10: Delimiters of any length with format //[delimiter]\n
+    it('TEST CASE 10: should support custom delimiters of any length', () => {
+        assert.strictEqual(calculator.Add("//[***]\n1***2***3"), 6);
+        assert.strictEqual(calculator.Add("//[###]\n4###5###6"), 15);
+        assert.strictEqual(calculator.Add("//[--]\n7--8--9"), 24);
+        assert.strictEqual(calculator.Add("//[++++]\n7++++8+++5+++10"), 30);
+    });
+    
 });
