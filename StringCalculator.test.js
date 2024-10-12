@@ -28,4 +28,11 @@ describe('StringCalculator', () => {
         assert.strictEqual(calculator.Add("5,10,15,20,25,30,35,40,45,50,55"), 330);
     });
 
+// TEST CASE 3: Allow the Add method to handle new lines between numbers (instead of commas)
+
+    it('should return the sum of any number of numbers separated by commas or new lines', () => {
+        assert.strictEqual(calculator.Add("1\n2,3"), 6); 
+        assert.strictEqual(calculator.Add("4\n5,6\n7"), 22);
+    });
+
 });

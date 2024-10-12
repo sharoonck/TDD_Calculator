@@ -1,10 +1,10 @@
 class StringCalculator {
     Add(numbers) {
         if (numbers === "") return 0;
-       
-        const numArray = numbers.split(",");
+
+        const numArray = numbers.split(/[, \n]/);
         let sum = 0;
-        
+
         for (let i = 0; i < numArray.length; i++) {
             const num = parseInt(numArray[i], 10);
             sum += num;
