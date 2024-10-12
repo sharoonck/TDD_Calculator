@@ -43,4 +43,24 @@ describe('StringCalculator', () => {
         assert.strictEqual(calculator.Add("//|\n3|4|5|6"), 18); // Using `|`
     });
 
+// TEST CASE 5: Calling Add with a negative number will throw an exception
+
+    it('should throw an exception for negative numbers', () => {
+        assert.throws(() => { calculator.Add("1,-2,3"); }, 
+        {
+            name: 'Error',
+            message: 'negatives not allowed: -2'
+        });
+        assert.throws(() => { calculator.Add("//;\n1;-2;3"); }, 
+        {
+            name: 'Error',
+            message: 'negatives not allowed: -2'
+        });
+        assert.throws(() => { calculator.Add("5,-1,-2"); }, 
+        {
+            name: 'Error',
+            message: 'negatives not allowed: -1, -2'
+        });
+    });
+
 });

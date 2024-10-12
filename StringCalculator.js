@@ -13,10 +13,20 @@ class StringCalculator {
         // Split the numbers using the custom delimiter
         const numArray = numbers.split(new RegExp(`[${delimiter}\\n]`));
         let sum = 0;
+        let negatives = [];
 
         for (let i = 0; i < numArray.length; i++) {
             const num = parseInt(numArray[i], 10);
-            sum += num;
+            if (num < 0) {
+                negatives.push(num); // Add negative number to the array
+            } else {
+                sum += num; // Only add non-negative numbers
+            }
+        }
+
+        // If there are negative numbers, throw an exception
+        if (negatives.length > 0) {
+            throw new Error(`negatives not allowed: ${negatives.join(", ")}`);
         }
 
         return sum;
