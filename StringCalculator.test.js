@@ -11,7 +11,7 @@ describe('StringCalculator', () => {
     
 //TEST CASE 1: basic add operations
 
-    it('should work for basic add operations', () => {
+    it('TEST CASE 1: should work for basic add operations', () => {
         assert.strictEqual(calculator.Add(""), 0);
         assert.strictEqual(calculator.Add("1"), 1);
         assert.strictEqual(calculator.Add("1,2"), 3);
@@ -20,7 +20,7 @@ describe('StringCalculator', () => {
 
 // TEST CASE 2: Allow the Add method to handle an unknown amount of numbers
 
-    it('should return the sum of any number of numbers separated by commas', () => {
+    it('TEST CASE 2: should return the sum of any number of numbers separated by commas', () => {
         assert.strictEqual(calculator.Add("1,2,3,4,5"), 15);
         assert.strictEqual(calculator.Add("10,20"), 30); 
         assert.strictEqual(calculator.Add("1,2,3"), 6); 
@@ -30,14 +30,14 @@ describe('StringCalculator', () => {
 
 // TEST CASE 3: Allow the Add method to handle new lines between numbers (instead of commas)
 
-    it('should return the sum of any number of numbers separated by commas or new lines', () => {
+    it('TEST CASE 3: should return the sum of any number of numbers separated by commas or new lines', () => {
         assert.strictEqual(calculator.Add("1\n2,3"), 6); 
         assert.strictEqual(calculator.Add("4\n5,6\n7"), 22);
     });
 
 // TEST CASE 4: Support different delimiters
 
-    it('should support different delimiters', () => {
+    it('TEST CASE 4: should support different delimiters', () => {
         assert.strictEqual(calculator.Add("//;\n1;2"), 3); // Using `;`
         assert.strictEqual(calculator.Add("//:\n5:10:15"), 30); // Using `:`
         assert.strictEqual(calculator.Add("//|\n3|4|5|6"), 18); // Using `|`
@@ -45,7 +45,7 @@ describe('StringCalculator', () => {
 
 // TEST CASE 5: Calling Add with a negative number will throw an exception
 
-    it('should throw an exception for negative numbers', () => {
+    it('TEST CASE 5: should throw an exception for negative numbers', () => {
         assert.throws(() => { calculator.Add("1,-2,3"); }, 
         {
             name: 'Error',
@@ -60,7 +60,7 @@ describe('StringCalculator', () => {
 
 // TEST CASE 6: If there are multiple negatives, show all of them in the exception message
 
-    it('should throw an exception for negative numbers and show as list', () => {
+    it('TEST CASE 6: should throw an exception for negative numbers and show as list', () => {
         assert.throws(() => { calculator.Add("5,-1,-2"); }, 
         {
             name: 'Error',
@@ -71,6 +71,18 @@ describe('StringCalculator', () => {
             name: 'Error',
             message: 'negatives not allowed: -5, -4'
         });
+    });
+
+// TEST CASE 7: GetCalledCount should return how many times Add was invoked
+
+    it('TEST CASE 7: should return the count of how many times Add was invoked', () => {
+        assert.strictEqual(calculator.GetCalledCount(), 0); // Initial count should be 0
+
+        calculator.Add("1,2");
+        calculator.Add("3,4");
+        calculator.Add("33,11");
+
+        assert.strictEqual(calculator.GetCalledCount(), 3); // Count should be 3 after 3 Add calls
     });
 
 });

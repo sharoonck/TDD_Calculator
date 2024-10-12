@@ -1,5 +1,11 @@
 class StringCalculator {
+    constructor() {
+        this.callCount = 0; // Initialize call counter
+    }
+
     Add(numbers) {
+        this.callCount++;
+
         if (numbers === "") return 0;
 
         const { delimiter, numString } = this.findDelimiter(numbers);
@@ -7,7 +13,7 @@ class StringCalculator {
         let sum = 0;
         const negatives = numArray.filter(num => parseInt(num, 10) < 0); // Filter negative numbers
 
-        // If there are negative numbers, throw an exception
+                // If there are negative numbers, throw an exception
         if (negatives.length > 0) {
             throw new Error(`negatives not allowed: ${negatives.join(", ")}`);
         }
@@ -17,7 +23,10 @@ class StringCalculator {
         return sum;
     }
 
-    // Separate function to find the delimiter and the remaining number string
+    GetCalledCount() {
+        return this.callCount;
+    }
+
     findDelimiter(input) {
         let delimiter = ",";
         let numString = input;
