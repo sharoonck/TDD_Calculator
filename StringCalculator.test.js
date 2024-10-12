@@ -86,6 +86,7 @@ describe('StringCalculator', () => {
     });
 
 // TEST CASE 9: Numbers bigger than 1000 should be ignored
+
     it('TEST CASE 9: should ignore numbers larger than 1000', () => {
         assert.strictEqual(calculator.Add("2,1001"), 2);
         assert.strictEqual(calculator.Add("1000,2000,3"), 1003); // Only adds 1000 and 3
@@ -93,11 +94,19 @@ describe('StringCalculator', () => {
     });
 
 // TEST CASE 10: Delimiters of any length with format //[delimiter]\n
+
     it('TEST CASE 10: should support custom delimiters of any length', () => {
         assert.strictEqual(calculator.Add("//[***]\n1***2***3"), 6);
         assert.strictEqual(calculator.Add("//[###]\n4###5###6"), 15);
         assert.strictEqual(calculator.Add("//[--]\n7--8--9"), 24);
         assert.strictEqual(calculator.Add("//[++++]\n7++++8+++5+++10"), 30);
     });
-    
+
+// TEST CASE 11: Allow multiple delimiters like this: “//[delim1][delim2]\n” 
+
+    it('TEST CASE 11: should allow multiple delimiters', () => {
+        assert.strictEqual(calculator.Add("//[*][%]\n1*2%3"), 6);
+        assert.strictEqual(calculator.Add("//[;][,]\n1;2,3"), 6);
+        assert.strictEqual(calculator.Add("//[***][%]\n1***2%3"), 6);
+    });
 });

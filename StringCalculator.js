@@ -9,8 +9,9 @@ class StringCalculator {
 
             if (numbers === "") return 0;
 
-            const { delimiter, numString } = this.findDelimiter(numbers);
-            const numArray = numString.split(new RegExp(`[${delimiter}]|\\n`));
+            const { delimiters, numString } = this.findDelimiters(numbers);
+            const delimiterRegex = new RegExp(`[${delimiters.join('')}]|\\n`);
+            const numArray = numString.split(delimiterRegex);
             const negatives = [];
 
             const sum = numArray.reduce((total, current) => {
@@ -32,7 +33,7 @@ class StringCalculator {
             return sum;
         }
         catch(error){
-            //console.log('StringCalculator:add:error:', error);
+             //console.log('StringCalculator:add:error:', error);
             throw error;
         }
     }
@@ -41,23 +42,25 @@ class StringCalculator {
         return this.callCount;
     }
 
-    findDelimiter(input) {
-        let delimiter = ",";
+    findDelimiters(input) {
+        let delimiters = [","];
         let numString = input;
-    
+
         // Check for custom delimiter with any length using brackets
-        const customDelimiterMatch = input.match(/^\/\/\[(.+)\]\n/);
-    
+        const customDelimiterMatch = input.match(/^\/\/\[(.+?)\]\n/);
+
         if (customDelimiterMatch) {
-            delimiter = customDelimiterMatch[1];
+            // Extract delimiters within square brackets
+            const delimiterString = customDelimiterMatch[1];
+            delimiters = delimiterString.split('][');
             numString = input.slice(customDelimiterMatch[0].length);
         } else if (input.startsWith("//")) {
             const parts = input.split("\n");
-            delimiter = parts[0].substring(2);
+            delimiters = [parts[0].substring(2)];
             numString = parts.slice(1).join("\n");
         }
-    
-        return { delimiter, numString };
+
+        return { delimiters, numString };
     }
 }
 
