@@ -56,10 +56,20 @@ describe('StringCalculator', () => {
             name: 'Error',
             message: 'negatives not allowed: -2'
         });
+    });
+
+// TEST CASE 6: If there are multiple negatives, show all of them in the exception message
+
+    it('should throw an exception for negative numbers', () => {
         assert.throws(() => { calculator.Add("5,-1,-2"); }, 
         {
             name: 'Error',
             message: 'negatives not allowed: -1, -2'
+        });
+        assert.throws(() => { calculator.Add("8,-5,-4,9"); }, 
+        {
+            name: 'Error',
+            message: 'negatives not allowed: -5, -4'
         });
     });
 
