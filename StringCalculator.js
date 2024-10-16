@@ -3,29 +3,30 @@ class StringCalculator {
         this.callCount = 0; // Initialize call counter
     }
 
-    Add(numbers) {
+    Add(input) {
         try {
             this.callCount++;
 
-            if (!numbers) return 0;
+            if (!input) return 0;
 
-            const { delimiters, numString } = this.findDelimiters(numbers);
+            const { delimiters, numString } = this.findDelimiters(input);
             const delimiterRegex = new RegExp(`[${delimiters.join('')}]|\\n`);
             const numArray = numString.split(delimiterRegex);
-            const negatives = [];
+            const negatives = numArray.filter((num) => num < 0 );
+
+            
+            if (negatives.length) {
+                throw new Error(`negatives not allowed: ${negatives.join(", ")}`);
+            }
+
             const sum = numArray.reduce((total, current) => {
                 const num = parseInt(current, 10);
-                if (num < 0) {
-                    negatives.push(num);
-                } else if (num <= 1000) {
+                if (num <= 1000) {
                     total += num; // Accumulate only numbers <= 1000
                 }
                 return total;
             }, 0);
 
-            if (negatives.length) {
-                throw new Error(`negatives not allowed: ${negatives.join(", ")}`);
-            }
 
             return sum;
         }
